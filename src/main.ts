@@ -1,24 +1,27 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { gerarBaralho } from './app/deckGenerator';
+import './styles/cards.css'; // Importe o CSS
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const baralho = gerarBaralho();
+const container = document.getElementById('app');
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+if (container) {
+  container.classList.add('cartas-container');
+
+  baralho.forEach((carta) => {
+    const div = document.createElement('div');
+    div.classList.add('carta');
+
+    const classeCor = carta.naipe === '♥' || carta.naipe === '♦'
+      ? 'naipe-vermelho'
+      : 'naipe-preto';
+    div.classList.add(classeCor);
+
+    div.innerHTML = `
+      <div class="valor-canto top-left">${carta.valor}<br>${carta.naipe}</div>
+      <div class="naipe-centro">${carta.naipe}</div>
+      <div class="valor-canto bottom-right">${carta.valor}<br>${carta.naipe}</div>
+    `;
+
+    container.appendChild(div);
+  });
+}

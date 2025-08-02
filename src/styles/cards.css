@@ -1,0 +1,54 @@
+.carta {
+    width: 80px;
+    height: 120px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    margin: 8px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+}
+
+.carta .valor-canto {
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+}
+
+.carta .valor-canto.top-left {
+    top: 4px;
+    left: 4px;
+}
+
+.carta .valor-canto.bottom-right {
+    bottom: 4px;
+    right: 4px;
+    transform: rotate(180deg);
+}
+
+.carta .naipe-centro {
+    font-size: 32px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Cores para naipes */
+.carta.naipe-vermelho {
+    color: red;
+}
+
+.carta.naipe-preto {
+    color: black;
+}
+
+/* Container para todas as cartas */
+.cartas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
