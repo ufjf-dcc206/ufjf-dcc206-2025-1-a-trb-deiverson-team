@@ -1,0 +1,21 @@
+.board-game {
+    height: 60vw;
+    width: 90vw;
+    max-width: 1000px;
+    max-height: 500px;
+    margin: 0 auto;
+    background: radial-gradient(circle at center, #2e7d32, #1b5e20);
+    border: 8px solid #4e342e;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    position: relative;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    overflow: hidden;
+
+
+}

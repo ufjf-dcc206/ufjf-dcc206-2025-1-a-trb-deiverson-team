@@ -47,8 +47,35 @@
 }
 
 /* Container para todas as cartas */
-.cartas-container {
+.cards-container {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+}
+
+
+.carta.selecionada {
+  outline: 3px solid blue;
+  transform: translateY(-5px);
+}
+
+.btn-descartar {
+  margin-top: 16px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.btn-descartar:hover {
+  background-color: #ddd;
+}
+
+.info-bar {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
 }
