@@ -2,40 +2,48 @@ import { DeckGenerator } from "./app/deckGenerator";
 // import './styles/cards.css'; // Importe o CSS
 import "./styles/board-game.css";
 import "./styles/body.css";
+import "./styles/buttons.css";
 
 let deck: DeckGenerator = new DeckGenerator();
 // deck.getBaralho();
 
-const container = document.getElementById("app");
+const boardgame = document.getElementById("boardgame");
+const buttons: HTMLElement | null = document.getElementById("buttons");
+insertbuttons();
 
-if (container) {
-    container.classList.add("board-game");
-    const boardGameContainer = document.createElement("div");
-    boardGameContainer.classList.add("board-game-container");
-    boardGameContainer.appendChild(deck);
+insertBoardGame();
 
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("btn-container");
 
-    const buttonReRender = document.createElement("button");
-    buttonReRender.classList.add("btn-reset");
-    buttonReRender.innerText = "Reiniciar Jogo";
-    buttonReRender.addEventListener("click", () => {
-        deck.remove();
-        deck = new DeckGenerator();
+function insertBoardGame() {
+    if (boardgame) {
+        boardgame.classList.add("board-game");
+        const boardGameContainer = document.createElement("div");
+        boardGameContainer.classList.add("board-game-container");
         boardGameContainer.appendChild(deck);
-    });
-    buttonContainer.appendChild(buttonReRender);
+        boardgame.appendChild(boardGameContainer);
+    }
+}
 
-    const buttonDescartar = document.createElement("button");
-    buttonDescartar.classList.add("btn-discard");
-    buttonDescartar.innerText = "Descartar Selecionadas";
-    buttonDescartar.addEventListener("click", () => {
-        deck.removeSelectedCards();
-    });
+insertBoardGame();
+function insertbuttons() {
+    if (buttons) {
+        const buttonReRender = document.createElement("button");
+        buttonReRender.classList.add("btn-reset");
+        buttonReRender.innerText = "Reiniciar Jogo";
+        buttonReRender.addEventListener("click", () => {
+            deck.remove();
+            deck = new DeckGenerator();
+            boardgame?.appendChild(deck);
+        });
+        buttons.appendChild(buttonReRender);
 
-    buttonContainer.appendChild(buttonDescartar);
+        const buttonDescartar = document.createElement("button");
+        buttonDescartar.classList.add("btn-discard");
+        buttonDescartar.innerText = "Descartar Selecionadas";
+        buttonDescartar.addEventListener("click", () => {
+            deck.removeSelectedCards();
+        });
 
-    container.appendChild(boardGameContainer);
-    container.appendChild(buttonContainer);
+        buttons.appendChild(buttonDescartar);
+    }
 }
