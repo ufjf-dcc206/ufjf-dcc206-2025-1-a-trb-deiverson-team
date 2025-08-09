@@ -9,10 +9,10 @@ let deck: DeckGenerator = new DeckGenerator();
 
 const boardgame = document.getElementById("boardgame");
 const buttons: HTMLElement | null = document.getElementById("buttons");
+console.log("here");
 insertbuttons();
 
 insertBoardGame();
-
 
 function insertBoardGame() {
     if (boardgame) {

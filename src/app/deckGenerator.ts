@@ -1,9 +1,10 @@
-import { naipes, valores, nomesValor, nomesNaipe, type Carta } from "./Card";
+import { naipes, values, valueNames, naipeNames, type Card } from "./types";
 import cardsCss from "../styles/cards.css?inline";
+import { CardHTML } from "./cards";
 
 export class DeckGenerator extends HTMLElement {
-    private deck: Carta[] = [];
-    private hand: Carta[] = [];
+    private deck: Card[] = [];
+    private hand: Card[] = [];
 
     constructor() {
         super();
@@ -17,14 +18,14 @@ export class DeckGenerator extends HTMLElement {
     gerarDeck(): void {
         this.deck = [];
         naipes.forEach((naipe) => {
-            valores.forEach((valor) => {
-                const nome = `${nomesValor[valor]} de ${nomesNaipe[naipe]}`;
-                this.deck.push({ valor, naipe, nome });
+            values.forEach((valor) => {
+                const nome = `${valueNames[valor]} de ${naipeNames[naipe]}`;
+                this.deck.push({ value: valor, naipe, name: nome });
             });
         });
     }
 
-    getDeck(): Carta[] {
+    getDeck(): Card[] {
         return this.deck;
     }
 
@@ -37,7 +38,7 @@ export class DeckGenerator extends HTMLElement {
 
     fillHand(): void {
         while (this.hand.length < 8) {
-            const carta: Carta | undefined = this.deck.pop();
+            const carta: Card | undefined = this.deck.pop();
             if (carta !== undefined) {
                 this.hand.push(carta);
             } else {
@@ -68,35 +69,18 @@ export class DeckGenerator extends HTMLElement {
     render(): void {
         if (!this.shadowRoot) return;
 
-        // Limpa o conteúdo atual
         this.shadowRoot.innerHTML = "";
 
-        // Aplica o CSS
         const style = document.createElement("style");
         style.textContent = cardsCss;
         this.shadowRoot.appendChild(style);
 
-        // Cria container das cartas
         const cardsContainer = document.createElement("div");
         cardsContainer.classList.add("cards-container");
 
-        this.hand.forEach((carta) => {
-            const div = document.createElement("div");
-            div.classList.add("carta");
-
-            const classeCor = carta.naipe === "♥" || carta.naipe === "♦" ? "naipe-vermelho" : "naipe-preto";
-            div.classList.add(classeCor);
-
-            div.innerHTML = `
-            <div class="valor-canto top-left">${carta.valor}<br>${carta.naipe}</div>
-            <div class="naipe-centro">${carta.naipe}</div>
-            <div class="valor-canto bottom-right">${carta.valor}<br>${carta.naipe}</div>
-        `;
-
-            div.dataset.index = this.hand.indexOf(carta).toString();
-
-            // Agora sim o event listener vai funcionar
-            div.addEventListener("click", (event) => {
+        this.hand.forEach((carta, index) => {
+            const cardHTML = new CardHTML(carta);
+            const div = cardHTML.genereteElement(index.toString(), (event) => {
                 const target = event.currentTarget as HTMLElement;
                 target.classList.toggle("selecionada");
 

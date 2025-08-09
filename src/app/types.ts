@@ -1,7 +1,7 @@
 export type Naipe = "♠" | "♥" | "♦" | "♣";
-export type ValorDaCarta = "A" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "J" | "Q" | "K";
-export type NomesNaipe = { "♠": "Espadas"; "♥": "Copas"; "♦": "Ouros"; "♣": "Paus" };
-export type NomesValor = {
+export type cardValue = "A" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "J" | "Q" | "K";
+export type NaipeNames = { "♠": "Espadas"; "♥": "Copas"; "♦": "Ouros"; "♣": "Paus" };
+export type ValueNames = {
     A: "Ás";
     "2": "Dois";
     "3": "Três";
@@ -16,19 +16,19 @@ export type NomesValor = {
     Q: "Dama";
     K: "Rei";
 };
-export interface Carta {
-    valor: ValorDaCarta;
+export interface Card {
+    value: cardValue;
     naipe: Naipe;
-    nome: string; // Ex: "Ás de Copas"
+    name: string; // Ex: "Ás de Copas"
 }
 
 export const naipes: Naipe[] = ["♠", "♥", "♦", "♣"];
 
-export const valores: ValorDaCarta[] = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+export const values: cardValue[] = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
-export const nomesNaipe: NomesNaipe = { "♠": "Espadas", "♥": "Copas", "♦": "Ouros", "♣": "Paus" };
+export const naipeNames: NaipeNames = { "♠": "Espadas", "♥": "Copas", "♦": "Ouros", "♣": "Paus" };
 
-export const nomesValor: NomesValor = {
+export const valueNames: ValueNames = {
     A: "Ás",
     "2": "Dois",
     "3": "Três",
