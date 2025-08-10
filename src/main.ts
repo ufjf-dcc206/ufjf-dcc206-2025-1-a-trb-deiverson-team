@@ -9,6 +9,14 @@ let deck: DeckGenerator = new DeckGenerator();
 
 const boardgame = document.getElementById("boardgame");
 const buttons: HTMLElement | null = document.getElementById("buttons");
+const sideBar: HTMLElement | null = document.getElementById("sidebar");
+if (sideBar) {
+    sideBar.classList.add("sidebar");
+    const scoreBoard = document.createElement("score-board");
+    sideBar.appendChild(scoreBoard);
+}
+
+
 console.log("here");
 insertbuttons();
 
@@ -24,7 +32,8 @@ function insertBoardGame() {
     }
 }
 
-insertBoardGame();
+// insertBoardGame();
+
 function insertbuttons() {
     if (buttons) {
         const buttonReRender = document.createElement("button");

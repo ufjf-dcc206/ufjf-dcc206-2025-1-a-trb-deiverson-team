@@ -1,0 +1,30 @@
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    justify-content: space-evenly;
+    height: 100%;
+
+}
+
+.item {
+    background: #333;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+
+@media (max-width: 500px) {
+    .scoreboard {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+        max-width: 100%;
+    }
+
+    .item {
+        flex: 1 1 45%;
+        text-align: center;
+    }
+}

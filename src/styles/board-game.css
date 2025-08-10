@@ -1,8 +1,6 @@
 .board-game {
     height: 100%;
     width: 100%;
-    /* max-width: 1000px;
-    max-height: 500px; */
     margin: 0 auto;
     background: radial-gradient(circle at center, #2e7d32, #1b5e20);
     border: 8px solid #4e342e;
@@ -17,8 +15,6 @@
 
     justify-content: center;
     overflow: hidden;
-
-
 }
 
 
@@ -26,9 +22,7 @@
 /* responsividade para celular */
 @media (max-width: 600px) {
     .board-game {
-        height: 90vh;
-        width: 85vw;
-        max-height: 70vh;
-        max-width: 85vw;
+        height: 60vh;
+        width: 100%;
     }
 }

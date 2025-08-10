@@ -2,9 +2,13 @@
     display: flex;
     justify-content: center;
     gap: 16px;
+    background: radial-gradient(circle at center, #2e7d32, #1b5e20);
+    border: 8px solid #4e342e;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.btn-discard, .btn-reset,.btn-play {
+.btn-discard, .btn-reset, .btn-play {
     height: 40px;
     margin-top: 16px;
     padding: 8px 16px;
@@ -22,13 +26,14 @@
 
 @media (max-width: 600px) {
     .btn-container {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
     }
 
-    .btn-discard, .btn-reset {
-        width: 100%;
-        margin-top: 8px;
-
+    .btn-discard, .btn-reset, .btn-play {
+        width: 40%;
+        padding: 6px 12px;
+        font-size: 14px;
     }
 }
