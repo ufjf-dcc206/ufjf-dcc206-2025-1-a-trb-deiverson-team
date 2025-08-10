@@ -1,38 +1,20 @@
 import { DeckGenerator } from "./app/deckGenerator";
-// import './styles/cards.css'; // Importe o CSS
+import { ScoreBoard } from "./app/score";
+
 import "./styles/board-game.css";
 import "./styles/body.css";
 import "./styles/buttons.css";
 
 let deck: DeckGenerator = new DeckGenerator();
-// deck.getBaralho();
+let scoreBoard: ScoreBoard = new ScoreBoard();
 
 const boardgame = document.getElementById("boardgame");
 const buttons: HTMLElement | null = document.getElementById("buttons");
 const sideBar: HTMLElement | null = document.getElementById("sidebar");
-if (sideBar) {
-    sideBar.classList.add("sidebar");
-    const scoreBoard = document.createElement("score-board");
-    sideBar.appendChild(scoreBoard);
-}
 
-
-console.log("here");
-insertbuttons();
-
+insertScoreBoard();
 insertBoardGame();
-
-function insertBoardGame() {
-    if (boardgame) {
-        boardgame.classList.add("board-game");
-        const boardGameContainer = document.createElement("div");
-        boardGameContainer.classList.add("board-game-container");
-        boardGameContainer.appendChild(deck);
-        boardgame.appendChild(boardGameContainer);
-    }
-}
-
-// insertBoardGame();
+insertbuttons();
 
 function insertbuttons() {
     if (buttons) {
@@ -50,7 +32,9 @@ function insertbuttons() {
         buttonDescartar.classList.add("btn-discard");
         buttonDescartar.innerText = "Descartar Selecionadas";
         buttonDescartar.addEventListener("click", () => {
-            deck.removeSelectedCards();
+            if (scoreBoard.getNumberOfDiscards() > 0) {
+                deck.removeSelectedCards(scoreBoard);
+            }
         });
 
         buttons.appendChild(buttonDescartar);
@@ -59,9 +43,37 @@ function insertbuttons() {
         buttonPlay.classList.add("btn-play");
         buttonPlay.innerText = "Jogar Selecionadas";
         buttonPlay.addEventListener("click", () => {
-            deck.playSelectedCards();
+            let handScore: { points: number; hand: string } | boolean = deck.playSelectedCards();
+
+            if (typeof handScore === "boolean") {
+                return;
+            }
+
+            scoreBoard.addScore(handScore.points);
+            scoreBoard.increaseGoal();
+            scoreBoard.decrementPlays();
+
         });
 
         buttons.appendChild(buttonPlay);
+    }
+}
+
+function insertBoardGame() {
+    if (boardgame) {
+        boardgame.classList.add("board-game");
+        const boardGameContainer = document.createElement("div");
+        boardGameContainer.classList.add("board-game-container");
+        boardGameContainer.appendChild(deck);
+        boardgame.appendChild(boardGameContainer);
+    }
+}
+
+function insertScoreBoard() {
+    if (sideBar) {
+        const scoreBoardContainer = document.createElement("div");
+        scoreBoardContainer.classList.add("scoreboard");
+        scoreBoardContainer.appendChild(scoreBoard);
+        sideBar.appendChild(scoreBoardContainer);
     }
 }

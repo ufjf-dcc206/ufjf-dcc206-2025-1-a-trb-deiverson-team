@@ -26,5 +26,6 @@
     .item {
         flex: 1 1 45%;
         text-align: center;
+        width: 20px;
     }
 }

@@ -17,12 +17,24 @@
     overflow: hidden;
 }
 
-
+.scoreboard {
+    height: 100%;
+}
 
 /* responsividade para celular */
 @media (max-width: 600px) {
     .board-game {
         height: 60vh;
         width: 100%;
+    }
+
+    .scoreboard {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+        max-width: 100%;
+        padding: auto;
+
     }
 }

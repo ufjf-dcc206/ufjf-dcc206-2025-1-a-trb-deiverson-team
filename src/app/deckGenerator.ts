@@ -2,6 +2,7 @@ import { naipes, values, valueNames, naipeNames, type Card, type cardValue, type
 import cardsCss from "../styles/cards.css?inline";
 import { CardHTML } from "./cards";
 import { calculateScore } from "./handCalculator";
+import { ScoreBoard } from "./score";
 
 export class DeckGenerator extends HTMLElement {
     private deck: Card[] = [];
@@ -48,7 +49,7 @@ export class DeckGenerator extends HTMLElement {
         }
     }
 
-    removeSelectedCards(): void {
+    removeSelectedCards(scoreBoard: ScoreBoard): void {
         const selectedCards = this.shadowRoot?.querySelectorAll(".carta.selecionada");
         if (selectedCards) {
             const indexes: number[] = [];
@@ -57,17 +58,21 @@ export class DeckGenerator extends HTMLElement {
                     card.getAttribute("data-index") ? parseInt(card.getAttribute("data-index") || "0", 10) : 0
                 );
             });
+            if (indexes.length === 0) {
+                return;
+            }
             indexes.sort((a, b) => b - a); // Ordena os índices em ordem decrescente
             // Remove as cartas selecionadas da mão
             indexes.forEach((index) => {
                 this.hand.splice(index, 1);
             });
+            scoreBoard.decrementDiscards();
             this.fillHand();
             this.render();
         }
     }
 
-    playSelectedCards(): void {
+    playSelectedCards(): { points: number; hand: string } | boolean {
         const selectedCards = this.shadowRoot?.querySelectorAll(".carta.selecionada");
         if (selectedCards?.length && selectedCards.length > 0) {
             const indexes: number[] = [];
@@ -81,21 +86,23 @@ export class DeckGenerator extends HTMLElement {
             });
             const calculatedScore: { points: number; hand: string } | number = calculateScore(cards);
             if (typeof calculatedScore === "number") {
-                return;
+                return false;
             }
-            // Exibir a pontuação calculada
-            // adicionar a pontuação aos campos que serão criados em score.ts
             console.log(calculatedScore);
             selectedCards.forEach((card) => {
                 indexes.push(
                     card.getAttribute("data-index") ? parseInt(card.getAttribute("data-index") || "0", 10) : 0
                 );
             });
-            indexes.sort((a, b) => b - a); // Ordena os
-
+            indexes.sort((a, b) => b - a); 
+            indexes.forEach((index) => {
+                this.hand.splice(index, 1);
+            });
             this.fillHand();
             this.render();
+            return calculatedScore;
         }
+        return false;
     }
 
     render(): void {
