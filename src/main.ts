@@ -45,5 +45,14 @@ function insertbuttons() {
         });
 
         buttons.appendChild(buttonDescartar);
+
+        const buttonPlay = document.createElement("button");
+        buttonPlay.classList.add("btn-play");
+        buttonPlay.innerText = "Jogar Selecionadas";
+        buttonPlay.addEventListener("click", () => {
+            deck.playSelectedCards();
+        });
+
+        buttons.appendChild(buttonPlay);
     }
 }

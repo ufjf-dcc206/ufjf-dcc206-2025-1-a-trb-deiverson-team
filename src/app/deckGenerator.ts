@@ -1,6 +1,7 @@
-import { naipes, values, valueNames, naipeNames, type Card } from "./types";
+import { naipes, values, valueNames, naipeNames, type Card, type cardValue, type Naipe } from "./types";
 import cardsCss from "../styles/cards.css?inline";
 import { CardHTML } from "./cards";
+import { calculateScore } from "./handCalculator";
 
 export class DeckGenerator extends HTMLElement {
     private deck: Card[] = [];
@@ -61,6 +62,37 @@ export class DeckGenerator extends HTMLElement {
             indexes.forEach((index) => {
                 this.hand.splice(index, 1);
             });
+            this.fillHand();
+            this.render();
+        }
+    }
+
+    playSelectedCards(): void {
+        const selectedCards = this.shadowRoot?.querySelectorAll(".carta.selecionada");
+        if (selectedCards?.length && selectedCards.length > 0) {
+            const indexes: number[] = [];
+            let cards: Card[] = [];
+            selectedCards.forEach((card) => {
+                cards.push({
+                    value: card.getAttribute("data-valor") as cardValue,
+                    naipe: card.getAttribute("data-naipe") as Naipe,
+                    name: card.getAttribute("data-name") || "",
+                });
+            });
+            const calculatedScore: { points: number; hand: string } | number = calculateScore(cards);
+            if (typeof calculatedScore === "number") {
+                return;
+            }
+            // Exibir a pontuação calculada
+            // adicionar a pontuação aos campos que serão criados em score.ts
+            console.log(calculatedScore);
+            selectedCards.forEach((card) => {
+                indexes.push(
+                    card.getAttribute("data-index") ? parseInt(card.getAttribute("data-index") || "0", 10) : 0
+                );
+            });
+            indexes.sort((a, b) => b - a); // Ordena os
+
             this.fillHand();
             this.render();
         }

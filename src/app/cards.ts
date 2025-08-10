@@ -10,7 +10,11 @@ export class CardHTML {
     genereteElement(index: string, onClick?: (event: MouseEvent) => void): HTMLDivElement {
         const div = document.createElement("div");
         div.classList.add("carta");
+        div.setAttribute("data-valor", this.card.value);
+        div.setAttribute("data-naipe", this.card.naipe);
+        div.setAttribute("data-name", this.card.name || "");
 
+        div.setAttribute("data-index", index);
         const classeCor = this.card.naipe === "♥" || this.card.naipe === "♦" ? "naipe-vermelho" : "naipe-preto";
         div.classList.add(classeCor);
 
