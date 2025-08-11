@@ -2,38 +2,70 @@
     display: flex;
     justify-content: center;
     gap: 16px;
-    background: radial-gradient(circle at center, #2e7d32, #1b5e20);
-    border: 8px solid #4e342e;
+    padding: 12px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    flex-wrap: wrap;
 }
 
-.btn-discard, .btn-reset, .btn-play {
-    height: 40px;
-    margin-top: 16px;
-    padding: 8px 16px;
+/* Estilo base dos botões */
+.btn-discard,
+.btn-reset,
+.btn-play {
+    height: 42px;
+    padding: 8px 20px;
     font-size: 16px;
-    border: 1px solid #333;
-    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    background-color: #eee;
+    color: #fff;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Cores específicas */
+.btn-discard {
+    background: linear-gradient(135deg, #e53935, #b71c1c);
+}
+
+.btn-reset {
+    background: linear-gradient(135deg, #fbc02d, #f57f17);
+    color: #222;
+}
+
+.btn-play {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+}
+
+/* Hover interativo */
 .btn-discard:hover,
-.btn-reset:hover {
-    background-color: #ddd;
+.btn-reset:hover,
+.btn-play:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.1);
 }
 
+/* Clique */
+.btn-discard:active,
+.btn-reset:active,
+.btn-play:active {
+    transform: scale(0.97);
+}
+
+/* Responsividade */
 @media (max-width: 600px) {
     .btn-container {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 6px;
+        gap: 8px;
     }
 
-    .btn-discard, .btn-reset, .btn-play {
-        width: 40%;
-        padding: 6px 12px;
+    .btn-discard,
+    .btn-reset,
+    .btn-play {
+        width: 45%;
         font-size: 14px;
+        padding: 6px 12px;
     }
 }

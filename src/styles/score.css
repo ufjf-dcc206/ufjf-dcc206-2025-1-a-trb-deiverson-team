@@ -1,31 +1,69 @@
 .scoreboard {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #1e1e2f, #2a2a40);
     color: #fff;
-    justify-content: space-evenly;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    width: 220px;
     height: 100%;
-
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: stretch;
 }
 
 .item {
-    background: #333;
-    padding: 6px 10px;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    transition: transform 0.2s ease, background 0.2s ease;
 }
 
-@media (max-width: 500px) {
+.item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.item span.label {
+    font-size: 0.85rem;
+    color: #aaa;
+    display: block;
+}
+
+.item span.value {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+@media(max-width: 1100px) {
     .scoreboard {
+        width: 99%;
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 4px;
-        max-width: 100%;
+        justify-content: space-around;
+        gap: 8px;
+        padding: 12px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .item {
+        flex: 1 1;
+        font-size: 0.9rem;
     }
 
-    .item {
-        flex: 1 1 45%;
-        text-align: center;
-        width: 20px;
+    .item span.value {
+        font-size: 1.1rem;
     }
+
 }

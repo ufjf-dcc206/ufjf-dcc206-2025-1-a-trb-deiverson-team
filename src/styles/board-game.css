@@ -1,6 +1,7 @@
 .board-game {
     height: 100%;
     width: 100%;
+
     margin: 0 auto;
     background: radial-gradient(circle at center, #2e7d32, #1b5e20);
     border: 8px solid #4e342e;
@@ -10,31 +11,31 @@
     position: relative;
 
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
 
     justify-content: center;
-    overflow: hidden;
 }
 
 .scoreboard {
     height: 100%;
 }
 
-/* responsividade para celular */
-@media (max-width: 600px) {
-    .board-game {
-        height: 60vh;
-        width: 100%;
-    }
-
+@media(max-width: 1100px) {
     .scoreboard {
         width: 100%;
         flex-direction: row;
         flex-wrap: wrap;
         gap: 4px;
-        max-width: 100%;
         padding: auto;
+        overflow: hidden;
+    }
 
+    .board-game {
+        height: 60vh;
+        width: 100%;
     }
 }
+
+/* responsividade para celular */
+@media (max-width: 600px) {}

@@ -14,17 +14,33 @@ export class ScoreBoard extends HTMLElement {
     private render(): void {
         if (!this.shadowRoot) return;
         this.shadowRoot.innerHTML = "";
+
         const style = document.createElement("style");
         style.textContent = boardCss;
         this.shadowRoot.appendChild(style);
+
         const container = document.createElement("div");
         container.classList.add("scoreboard");
+
         container.innerHTML = `
-            <div class="item">Goal: ${this.goal}</div>
-            <div class="item">Score: ${this.score}</div>
-            <div class="item">Discards: ${this.numberOfDiscards}</div>
-            <div class="item">Plays: ${this.numberOfPlays}</div>
-        `;
+        <div class="item">
+            <span class="label">🎯 Goal</span>
+            <span class="value">${this.goal}</span>
+        </div>
+        <div class="item">
+            <span class="label">🏆 Score</span>
+            <span class="value">${this.score}</span>
+        </div>
+        <div class="item">
+            <span class="label">🗑️ Discards</span>
+            <span class="value">${this.numberOfDiscards}</span>
+        </div>
+        <div class="item">
+            <span class="label">🎲 Plays</span>
+            <span class="value">${this.numberOfPlays}</span>
+        </div>
+    `;
+
         this.shadowRoot.appendChild(container);
     }
 
@@ -47,8 +63,9 @@ export class ScoreBoard extends HTMLElement {
             this.render();
         }
     }
+
     public increaseGoal(): void {
-        this.goal += 100 * (4 - this.numberOfPlays);
+        if (this.numberOfPlays > 0) this.goal *= 2;
         this.render();
     }
 
@@ -64,6 +81,10 @@ export class ScoreBoard extends HTMLElement {
         this.numberOfDiscards = 3;
         this.numberOfPlays = 4;
         this.render();
+    }
+
+    verifyGoal(): boolean {
+        return this.score >= this.goal;
     }
 }
 

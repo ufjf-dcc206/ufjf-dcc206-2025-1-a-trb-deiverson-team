@@ -94,7 +94,7 @@ export class DeckGenerator extends HTMLElement {
                     card.getAttribute("data-index") ? parseInt(card.getAttribute("data-index") || "0", 10) : 0
                 );
             });
-            indexes.sort((a, b) => b - a); 
+            indexes.sort((a, b) => b - a);
             indexes.forEach((index) => {
                 this.hand.splice(index, 1);
             });
@@ -104,6 +104,8 @@ export class DeckGenerator extends HTMLElement {
         }
         return false;
     }
+
+  
 
     render(): void {
         if (!this.shadowRoot) return;
