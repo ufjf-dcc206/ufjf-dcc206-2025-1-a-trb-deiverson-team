@@ -12,6 +12,14 @@
   justify-content: space-between;
   font-family: 'Segoe UI', sans-serif;
   position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.carta:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+  border-color: #0077ff;
+  cursor: pointer;
 }
 
 .carta .valor-canto {
@@ -55,7 +63,6 @@
   height: 100%;
   align-content: center;
 }
-
 
 .carta.selecionada {
   outline: 3px solid blue;
