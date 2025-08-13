@@ -1,4 +1,5 @@
-import boardCss from "../styles/score.css/?inline";
+import boardCss from "../styles/score.css?inline";
+const GOAL:number = 75
 export class ScoreBoard extends HTMLElement {
     private goal: number = 75;
     private score: number = 0;
@@ -77,7 +78,7 @@ export class ScoreBoard extends HTMLElement {
     }
     public resetScoreBoard(): void {
         this.score = 0;
-        this.goal = 100;
+        this.goal = GOAL;
         this.numberOfDiscards = 3;
         this.numberOfPlays = 4;
         this.render();

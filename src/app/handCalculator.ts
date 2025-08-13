@@ -1,4 +1,4 @@
-import { type cardValue, type Card, translationHandTypes } from "./types";
+import { type cardValue, type Card, translationHandTypes, values } from "./types";
 
 export function calculateScore(cards: Card[]): { points: number; hand: string } | number {
     console.log("Calculando pontuação para as cartas:", cards);
@@ -59,7 +59,9 @@ export function calculateScore(cards: Card[]): { points: number; hand: string } 
 
     return {
         points: points * multiplier,
-        hand: `Tipo de mão: ${translationHandTypes[typeOfHand]}, Pontos: ${points}, Multiplicador: ${multiplier}, total: ${points * multiplier}`,
+        hand: ` ${translationHandTypes[typeOfHand]}, Pontos: ${points}, Multiplicador: ${multiplier}, total: ${
+            points * multiplier
+        }`,
     };
 }
 
@@ -76,9 +78,13 @@ function isFlush(cards: Card[]): boolean {
 }
 function isStraight(cards: Card[]): boolean {
     if (cards.length === 0) return false;
-    const valores = cards.map((card) => valorNumerico(card.value)).sort((a, b) => a - b);
-    for (let i = 1; i < valores.length; i++) {
-        if (valores[i] !== valores[i - 1] + 1) {
+    if (cards.length < 5) return false;
+    cards.sort((a, b) => values.indexOf(a.value) - values.indexOf(b.value));
+    
+    const firstValueIndex = values.indexOf(cards[0].value);
+    for (let i = 1; i < cards.length; i++) {
+        const currentValueIndex = values.indexOf(cards[i].value);
+        if (currentValueIndex !== firstValueIndex + i) {
             return false;
         }
     }
