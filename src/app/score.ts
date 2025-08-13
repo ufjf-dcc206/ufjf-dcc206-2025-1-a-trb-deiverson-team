@@ -1,5 +1,5 @@
 import boardCss from "../styles/score.css?inline";
-const GOAL:number = 50
+const GOAL:number = 75
 export class ScoreBoard extends HTMLElement {
     private goal: number = GOAL;
     private score: number = 0;
