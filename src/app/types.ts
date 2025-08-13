@@ -71,7 +71,7 @@ export const translationHandTypes: { [key: string]: string } = {
     "Royal Flush": "Sequência Real",
     "Straight Flush": "Sequência de mesmo naipe",
     "Four of a Kind": "Quadra",
-    "Full House": "Full Hand",
+    "Full House": "Full House",
     Flush: "Flush",
     Straight: "Sequência",
     "Three of a Kind": "Trinca",
