@@ -88,7 +88,7 @@ export class DeckGenerator extends HTMLElement {
             if (typeof calculatedScore === "number") {
                 return false;
             }
-            console.log(calculatedScore);
+
             selectedCards.forEach((card) => {
                 indexes.push(
                     card.getAttribute("data-index") ? parseInt(card.getAttribute("data-index") || "0", 10) : 0

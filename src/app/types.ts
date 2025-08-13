@@ -79,3 +79,5 @@ export const translationHandTypes: { [key: string]: string } = {
     "One Pair": "Um Par",
     "High Card": "Carta Alta",
 };
+
+export type typeOfMessage = "info" | "error" | "defeated" | "winner";

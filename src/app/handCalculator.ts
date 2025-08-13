@@ -57,10 +57,9 @@ export function calculateScore(cards: Card[]): { points: number; hand: string } 
             break;
     }
 
-    console.log(`Tipo de mão: ${translationHandTypes[typeOfHand]}, Pontos: ${points}, Multiplicador: ${multiplier}`);
     return {
         points: points * multiplier,
-        hand: `Tipo de mão: ${translationHandTypes[typeOfHand]}, Pontos: ${points}, Multiplicador: ${multiplier}`,
+        hand: `Tipo de mão: ${translationHandTypes[typeOfHand]}, Pontos: ${points}, Multiplicador: ${multiplier}, total: ${points * multiplier}`,
     };
 }
 
