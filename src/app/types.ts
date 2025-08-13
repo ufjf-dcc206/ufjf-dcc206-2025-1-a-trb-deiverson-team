@@ -68,12 +68,12 @@ export type ResultadoPontuacao = {
 };
 
 export const translationHandTypes: { [key: string]: string } = {
-    "Royal Flush": "Sequência Real",
-    "Straight Flush": "Sequência de mesmo naipe",
+    "Royal Flush": "Royal Flush",
+    "Straight Flush": "Straight Flush",
     "Four of a Kind": "Quadra",
     "Full House": "Full House",
     Flush: "Flush",
-    Straight: "Sequência",
+    Straight: "Straight",
     "Three of a Kind": "Trinca",
     "Two Pair": "Dois Pares",
     "One Pair": "Um Par",

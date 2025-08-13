@@ -76,20 +76,42 @@ function isFlush(cards: Card[]): boolean {
     const firstNaipe = cards[0].naipe;
     return cards.every((card) => card.naipe === firstNaipe);
 }
+
 function isStraight(cards: Card[]): boolean {
-    if (cards.length === 0) return false;
-    if (cards.length < 5) return false;
-    cards.sort((a, b) => values.indexOf(a.value) - values.indexOf(b.value));
-    
-    const firstValueIndex = values.indexOf(cards[0].value);
-    for (let i = 1; i < cards.length; i++) {
-        const currentValueIndex = values.indexOf(cards[i].value);
-        if (currentValueIndex !== firstValueIndex + i) {
-            return false;
+    //colocando o Ás como o último valor
+    const valuesAceHigh = [...values.slice(1), "A"];
+
+    // Converte para índices baseados no Ás alto
+    const sortedIndexes = cards.map((card) => valuesAceHigh.indexOf(card.value)).sort((a, b) => a - b);
+
+    // Função auxiliar para achar sequência
+    const hasSequence = (indexes: number[]) => {
+        let consecutive = 1;
+        for (let i = 1; i < indexes.length; i++) {
+            if (indexes[i] === indexes[i - 1] + 1) {
+                consecutive++;
+                if (consecutive >= 5) return true;
+            } else {
+                consecutive = 1;
+            }
         }
+        return false;
+    };
+
+    // Verifica sequência normal 10, J, Q, K, A (Ás alto)
+    if (hasSequence(sortedIndexes)) return true;
+
+    // Verifica sequência especial A-2-3-4-5 (Ás baixo)
+    if (sortedIndexes.includes(values.length - 1)) {
+        const indexesAceLow = cards
+            .map((card) => values.indexOf(card.value))
+            .sort((a, b) => a - b);
+        if (hasSequence(indexesAceLow)) return true;
     }
-    return true;
+
+    return false;
 }
+
 function isStraightFlush(cards: Card[]): boolean {
     return isFlush(cards) && isStraight(cards);
 }
@@ -152,6 +174,7 @@ function isOnePair(cards: Card[]): boolean {
     });
     return Object.values(valueCount).includes(2);
 }
+
 function identifyHandType(cards: Card[]): string {
     const numberOfCardsInHand = cards.length;
     if (numberOfCardsInHand === 5 && isRoyalFlush(cards)) return "Royal Flush";
