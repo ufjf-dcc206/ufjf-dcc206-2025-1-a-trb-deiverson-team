@@ -1,4 +1,4 @@
-import boardCss from "../styles/score.css/?inline";
+import boardCss from "../styles/score.css?inline";
 export class ScoreBoard extends HTMLElement {
     private goal: number = 50;
     private score: number = 0;
